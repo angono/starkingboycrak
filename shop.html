@@ -202,22 +202,14 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-        <!-- <script>
-    function shareOnWhatsApp(productName, imageUrl) {
-        var text = "Check out this product: " + productName;
-        var whatsappUrl = 'whatsapp://send?text=' + encodeURIComponent(text) + '&amp;img=' + encodeURIComponent(imageUrl);
-        window.location.href = whatsappUrl;
-    }
-</script> -->
-
-<script>
-    function shareOnWhatsApp(productName, imageUrl) {
-        var text = "Je voudrais commander ce produit: " + productName;
-        var phoneNumber = "+256773518172"; // WhatsApp number
-        var whatsappUrl = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(text);
-        window.open(whatsappUrl);
-    }
-</script>
+        <script>
+            function shareOnWhatsApp(productName) {
+                var text = "Je voudrais commander ce produit: " + productName;
+                var phoneNumber = "+22960627890"; // WhatsApp number
+                var whatsappUrl = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(text);
+                window.open(whatsappUrl);
+            }
+        </script>
 
 
 
