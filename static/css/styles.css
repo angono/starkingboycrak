@@ -10888,11 +10888,6 @@ body {
     padding: 5rem;
   }
 }
-@media (max-width: 992px) {
-  .projects-section {
-    padding: 2rem 0;
-  }
-}
 
 .signup-section {
   padding: 10rem 0;
@@ -10974,7 +10969,7 @@ a, .btn-link {
 }
 
 .shop-section {
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 .shop-section .featured-text {
   padding: 2rem;
@@ -11016,5 +11011,19 @@ a, .btn-link {
     padding: 5rem;
   }
 }
+
+@media (max-width: 992px) {
+  .projects-section {
+    padding: 2rem 0;
+  }
+  .shop-section {
+    padding: 2rem 0;
+  }
+  .service-section {
+    padding: 2rem 0;
+  }
+}
+
+
 
 
