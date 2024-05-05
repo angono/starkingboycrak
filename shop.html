@@ -92,6 +92,7 @@
                                 <h1 class="fs-5 text-primary fw-bold">Pull</h1>
                                 <a href="https://wa.me/+22960627890" target="_blank" class="card-text text-reset">Polo couleur bleue</a>
                                 <h5 class="fs-5 fw-bold mt-2">10,000 FCFA</h5>
+                                <!-- <a href="javascript:void(0);" onclick="shareOnWhatsApp('Polo couleur bleue', 'https://example.com/static/assets/shop/01.jpg')" class="btn btn-primary">Share on WhatsApp</a> -->
                             </div>
                         </div>
                     </div>
@@ -201,5 +202,15 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+        <script>
+    function shareOnWhatsApp(productName, imageUrl) {
+        var text = "Check out this product: " + productName;
+        var whatsappUrl = 'whatsapp://send?text=' + encodeURIComponent(text) + '&amp;img=' + encodeURIComponent(imageUrl);
+        window.location.href = whatsappUrl;
+    }
+</script>
+
+
     </body>
 </html>
