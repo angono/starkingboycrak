@@ -13,6 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Starking Boycrak - Musique</title>
 
+        <link rel="manifest" href="/manifest.json">
+
         <meta name="description" content="Official website of Artist, Rapper, compositor Starking Boycrak"/>
         <meta name="author" content="Starking Boycrak"/>
         
@@ -71,6 +73,16 @@
                 <div class="col-lg-8 mx-auto">
                     <div class="card shadow">
                         <div class="list-group list-group-flush">
+                            <a href="https://youtu.be/2Z9VUc5rmCM" target="_blank" class="list-group-item w-100 list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                                <img src="static/assets/music/music-icon.jpg" loading="lazy" alt="..." width="45" height="45" class="rounded flex-shrink-0">
+                                <div class="d-flex gap-2 w-100 justify-content-between">
+                                    <div class="flex-grow">
+                                        <h5 class="mb-0">Ressfa - Every day. Feat Starking Boycrak (Audio)</h5>
+                                        <p class="mb-0 small opacity-75">Cliquez pour écouter !</p>
+                                    </div>
+                                    <small class="text-primary fw-bold text-nowrap">Jouer</small>
+                                </div>
+                            </a>
                             <a href="https://youtu.be/8Wrm1h5mlEw" target="_blank" class="list-group-item w-100 list-group-item-action d-flex gap-3 py-3" aria-current="true">
                                 <img src="static/assets/music/music-icon.jpg" loading="lazy" alt="..." width="45" height="45" class="rounded flex-shrink-0">
                                 <div class="d-flex gap-2 w-100 justify-content-between">
@@ -184,5 +196,19 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
         <!-- Core theme JS-->
         <script src="static/js/bootstrap.min.js" defer></script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', function() {
+  navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }, function(error) {
+    console.log('ServiceWorker registration failed: ', error);
+  });
+});
+}
+</script>
+
     </body>
 </html>

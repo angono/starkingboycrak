@@ -14,6 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Starking Boycrak - Boutique</title>
 
+        <link rel="manifest" href="/manifest.json">
+
         <meta name="description" content="Official website of Artist, Rapper, compositor Starking Boycrak"/>
         <meta name="author" content="Starking Boycrak"/>
         
@@ -235,6 +237,17 @@
             }
         </script>
 
+<script>
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', function() {
+  navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }, function(error) {
+    console.log('ServiceWorker registration failed: ', error);
+  });
+});
+}
+</script>
 
 
     </body>
