@@ -1,47 +1,54 @@
-const CACHE_NAME = 'my-site-cache-v1';
-const urlsToCache = [
+// serviceworker.js
+// Base Service Worker implementation.  To use your own Service Worker, set the PWA_SERVICE_WORKER_PATH variable in settings.py
+
+var staticCacheName = "starking-v" + new Date().getTime();
+var filesToCache = [
   '/',
-  '/styles/main.css',
-  '/script/main.js',
-  '/offline.html'
+  '/static/css/styles.css',
+  '/static/css/boostrap.min.css',
+  '/static/css/custom.css',
+  '/static/js/boostrap.min.js',
+  '/static/js/scripts.js',
+  '/offline.html',
+  '/static/assets/favicon.ico',
+  '/static/assets/icon-192.png',
+  '/static/assets/logo.png'
 ];
 
-self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
-});
-
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        if (response) {
-          return response; // Cache hit - return response
-        }
-        return fetch(event.request).catch(function() {
-          return caches.match('/offline.html');
-        });
-      }
+// Cache on install
+self.addEventListener("install", event => {
+    this.skipWaiting();
+    event.waitUntil(
+        caches.open(staticCacheName)
+            .then(cache => {
+                return cache.addAll(filesToCache);
+            })
     )
-  );
 });
 
-self.addEventListener('activate', function(event) {
-  var cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
+// Clear cache on activate
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames
+                    .filter(cacheName => (cacheName.startsWith("starking-")))
+                    .filter(cacheName => (cacheName !== staticCacheName))
+                    .map(cacheName => caches.delete(cacheName))
+            );
         })
-      );
-    })
-  );
+    );
+});
+
+// Serve from Cache
+self.addEventListener("fetch", event => {
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => {
+                return response || fetch(event.request);
+            })
+            .catch(() => {
+                return caches.match('/offline/');
+            })
+    )
 });
