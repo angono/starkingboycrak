@@ -1,0 +1,53 @@
+
+<!-- songs.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Music — Starking Boycrak</title>
+  <meta name="description" content="Stream and download Starking Boycrak's music." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>:root{--bg-ink:#060507;--amber:#ff8a00}html,body{background:linear-gradient(180deg,var(--bg-ink),#0b0b0d 60%);color:#e6edf0;font-family:'Space Grotesk',system-ui;} .container-max{max-width:1180px;margin-left:auto;margin-right:auto}</style>
+</head>
+<body>
+  <header class="container-max px-6 py-6 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#2a0b2f] to-[#1f0a18] flex items-center justify-center" style="color:var(--amber);font-weight:700">SB</div><div><div class="font-semibold">Starking Boycrak</div><div class="text-xs text-gray-400">Official</div></div></a>
+    <nav class="hidden lg:flex gap-6 text-sm text-gray-200"><a href="songs.html" class="font-semibold">Music</a><a href="shop.html">Shop</a><a href="services.html">Services</a></nav>
+    <a href="mailto:booking@starkingboycrak.com" class="px-4 py-2 rounded bg-amber text-gray-400 text-sm">Book</a>
+  </header>
+
+  <main class="container-max px-6 pb-16">
+    <h1 class="text-3xl font-semibold mt-6">Music</h1>
+    <p class="text-gray-400 mt-2">Official tracks and albums.</p>
+
+    <section class="mt-8 space-y-5">
+      <article class="p-4 bg-[#071015] rounded-xl border border-gray-800 flex items-center gap-4">
+        <img src="static/images/music-icon.webp" alt="Ne Jamais Abandonner" class="w-20 h-20 object-cover rounded" />
+        <div class="flex-1">
+          <div class="font-semibold">Ne Jamais Abandonner</div>
+          <div class="text-sm text-gray-400">Single • 3:45</div>
+        </div>
+        <div>
+          <audio controls preload="none"><source src="/assets/audio/ne-jamais.mp3" type="audio/mpeg"></audio>
+        </div>
+      </article>
+
+      <article class="p-4 bg-[#071015] rounded-xl border border-gray-800 flex items-center gap-4">
+        <img src="static/images/music-icon.webp" alt="Lumiere" class="w-20 h-20 object-cover rounded" />
+        <div class="flex-1">
+          <div class="font-semibold">Lumière, Caméra, Action</div>
+          <div class="text-sm text-gray-400">Single • 4:05</div>
+        </div>
+        <div>
+          <audio controls preload="none"><source src="/assets/audio/lumiere.mp3" type="audio/mpeg"></audio>
+        </div>
+      </article>
+    </section>
+
+    <div class="mt-8 text-sm text-gray-400">Tip: host audio files on S3, Cloudflare R2, or a streaming provider and update the <code>src</code> URLs above.</div>
+  </main>
+</body>
+</html>
+

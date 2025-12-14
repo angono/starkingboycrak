@@ -1,0 +1,76 @@
+<!--
+Files: shop.html, songs.html, services.html
+Style: matches the minimal dark homepage (no JS), Tailwind CDN, same fonts and design language.
+Replace /assets/* and static/images/* with your real images.
+-->
+
+<!-- shop.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop — Starking Boycrak</title>
+  <meta name="description" content="Official merch and limited drops by Starking Boycrak." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-ink:#060507;--amber:#ff8a00;--glass:rgba(255,255,255,0.04);}html,body{height:100%;background:linear-gradient(180deg,var(--bg-ink),#0b0b0d 60%);color:#e6edf0;font-family:'Space Grotesk',system-ui;}
+    .container-max{max-width:1180px;margin-left:auto;margin-right:auto}
+    .product-card{background:#071015;border:1px solid rgba(255,255,255,0.03);border-radius:12px;overflow:hidden}
+  </style>
+</head>
+<body>
+  <header class="container-max px-6 py-6 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#2a0b2f] to-[#1f0a18] flex items-center justify-center" style="color:var(--amber);font-weight:700">SB</div><div><div class="font-semibold">Starking Boycrak</div><div class="text-xs text-gray-400">Official</div></div></a>
+    <nav class="hidden lg:flex gap-6 text-sm text-gray-200"><a href="songs.html">Music</a><a href="shop.html" class="font-semibold">Shop</a><a href="services.html">Services</a></nav>
+    <a href="mailto:booking@starkingboycrak.com" class="px-4 py-2 rounded bg-amber text-gray-400 text-sm">Book</a>
+  </header>
+
+  <main class="container-max px-6 pb-16">
+    <h1 class="text-3xl font-semibold mt-6">Shop</h1>
+    <p class="text-gray-400 mt-2">Curated official merchandise and limited editions.</p>
+
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="product-card">
+        <img src="static/images/01.webp" alt="SB Logo Tee" class="w-full h-64 lg:h-72 object-cover">
+        <div class="p-4">
+          <div class="flex items-center justify-between"><div class="font-semibold">SB Logo Tee</div><div class="text-lg font-bold">$35</div></div>
+          <p class="mt-2 text-sm text-gray-400">Premium cotton, embroidered logo. Limited run.</p>
+          <div class="mt-4 flex gap-3">
+            <a href="#" class="px-3 py-2 rounded border border-gray-800 text-sm">Details</a>
+            <a href="#" class="px-3 py-2 rounded bg-amber text-orange-400 text-sm">Order</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <img src="static/images/02.webp" alt="Album CD" class="w-full h-64 lg:h-72 object-cover">
+        <div class="p-4">
+          <div class="flex items-center justify-between"><div class="font-semibold">Ne Jamais Abandonner — CD</div><div class="text-lg font-bold">$14</div></div>
+          <p class="mt-2 text-sm text-gray-400">Deluxe CD with booklet and lyrics.</p>
+          <div class="mt-4 flex gap-3">
+            <a href="#" class="px-3 py-2 rounded border border-gray-800 text-sm">Details</a>
+            <a href="#" class="px-3 py-2 rounded bg-amber text-orange-400 text-sm">Order</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <img src="static/images/03.webp" alt="Signed poster" class="w-full h-64 lg:h-72 object-cover">
+        <div class="p-4">
+          <div class="flex items-center justify-between"><div class="font-semibold">Signed Poster</div><div class="text-lg font-bold">$45</div></div>
+          <p class="mt-2 text-sm text-gray-400">Limited edition, numbered print.</p>
+          <div class="mt-4 flex gap-3">
+            <a href="#" class="px-3 py-2 rounded border border-gray-800 text-sm">Details</a>
+            <a href="#" class="px-3 py-2 rounded bg-amber text-orange-400 text-sm">Order</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="mt-10 text-sm text-gray-400">Note: replace placeholder images and links with your store system (Shopify/Stripe/checkout links).</div>
+  </main>
+</body>
+</html>
+
