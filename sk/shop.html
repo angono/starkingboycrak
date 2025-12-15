@@ -1,10 +1,3 @@
-<!--
-Files: shop.html, songs.html, services.html
-Style: matches the minimal dark homepage (no JS), Tailwind CDN, same fonts and design language.
-Replace /assets/* and static/images/* with your real images.
--->
-
-<!-- shop.html -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,65 +5,208 @@ Replace /assets/* and static/images/* with your real images.
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Shop — Starking Boycrak</title>
   <meta name="description" content="Official merch and limited drops by Starking Boycrak." />
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" type="text/css" href="static/style.css">
+
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root{--bg-ink:#060507;--amber:#ff8a00;--glass:rgba(255,255,255,0.04);}html,body{height:100%;background:linear-gradient(180deg,var(--bg-ink),#0b0b0d 60%);color:#e6edf0;font-family:'Space Grotesk',system-ui;}
     .container-max{max-width:1180px;margin-left:auto;margin-right:auto}
     .product-card{background:#071015;border:1px solid rgba(255,255,255,0.03);border-radius:12px;overflow:hidden}
+    .price { color: #ffd7a8; }
   </style>
 </head>
 <body>
   <header class="container-max px-6 py-6 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#2a0b2f] to-[#1f0a18] flex items-center justify-center" style="color:var(--amber);font-weight:700">SB</div><div><div class="font-semibold">Starking Boycrak</div><div class="text-xs text-gray-400">Official</div></div></a>
-    <nav class="hidden lg:flex gap-6 text-sm text-gray-200"><a href="songs.html">Music</a><a href="shop.html" class="font-semibold">Shop</a><a href="services.html">Services</a></nav>
-    <a href="mailto:booking@starkingboycrak.com" class="px-4 py-2 rounded bg-amber text-gray-400 text-sm">Book</a>
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#2a0b2f] to-[#1f0a18] flex items-center justify-center" style="color:var(--amber);font-weight:700">SB</div>
+      <div>
+        <div class="font-semibold">Starking Boycrak</div>
+        <div class="text-xs text-gray-400">Official</div>
+      </div>
+    </a>
+    <nav class="hidden lg:flex gap-6 text-sm text-gray-200">
+      <a href="songs.html">Music</a>
+      <a href="shop.html" class="font-semibold">Shop</a>
+      <a href="services.html">Services</a>
+    </nav>
+    <a href="mailto:booking@starkingboycrak.com" class="px-4 py-2 rounded bg-amber text-gray-800 text-sm">Book</a>
   </header>
 
-  <main class="container-max px-6 pb-16">
+  <!-- Vue app root -->
+  <main id="app" class="container-max px-6 pb-16">
     <h1 class="text-3xl font-semibold mt-6">Shop</h1>
     <p class="text-gray-400 mt-2">Curated official merchandise and limited editions.</p>
 
+    <!-- Optional small search or quick filter -->
+    <div class="mt-6 flex items-center gap-4">
+      <input v-model="query" type="search" placeholder="Search products..." class="bg-[#071015] border border-gray-800 rounded px-3 py-2 text-sm w-full max-w-xs" />
+      <div class="text-sm text-gray-400">Showing <strong class="text-white">{{ filtered.length }}</strong></div>
+    </div>
+
+    <!-- product grid -->
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <article class="product-card">
-        <img src="static/assets/01.webp" alt="SB Logo Tee" class="w-full h-64 lg:h-72 object-cover">
+      <article v-for="product in filtered" :key="product.id" class="product-card">
+        <img :src="product.image" :alt="product.title" class="w-full h-64 lg:h-72 object-cover">
         <div class="p-4">
-          <div class="flex items-center justify-between"><div class="font-semibold">SB Logo Tee</div><div class="text-lg font-bold">$35</div></div>
-          <p class="mt-2 text-sm text-gray-400">Premium cotton, embroidered logo. Limited run.</p>
-          <div class="mt-4 flex gap-3">
-            <a href="#" class="px-3 py-2 rounded border border-gray-800 text-sm">Details</a>
-            <a href="#" class="px-3 py-2 rounded bg-amber text-orange-400 text-sm">Order</a>
+          <div class="flex items-center justify-between">
+            <div class="font-semibold">{{ product.title }}</div>
+            <div class="text-lg font-bold price">{{ formatPrice(product.price) }}</div>
           </div>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <img src="static/assets/02.webp" alt="Album CD" class="w-full h-64 lg:h-72 object-cover">
-        <div class="p-4">
-          <div class="flex items-center justify-between"><div class="font-semibold">Ne Jamais Abandonner — CD</div><div class="text-lg font-bold">$14</div></div>
-          <p class="mt-2 text-sm text-gray-400">Deluxe CD with booklet and lyrics.</p>
+          <p class="mt-2 text-sm text-gray-400">{{ product.description }}</p>
           <div class="mt-4 flex gap-3">
-            <a href="#" class="px-3 py-2 rounded border border-gray-800 text-sm">Details</a>
-            <a href="#" class="px-3 py-2 rounded bg-amber text-orange-400 text-sm">Order</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <img src="static/assets/03.webp" alt="Signed poster" class="w-full h-64 lg:h-72 object-cover">
-        <div class="p-4">
-          <div class="flex items-center justify-between"><div class="font-semibold">Signed Poster</div><div class="text-lg font-bold">$45</div></div>
-          <p class="mt-2 text-sm text-gray-400">Limited edition, numbered print.</p>
-          <div class="mt-4 flex gap-3">
-            <a href="#" class="px-3 py-2 rounded border border-gray-800 text-sm">Details</a>
-            <a href="#" class="px-3 py-2 rounded bg-amber text-orange-400 text-sm">Order</a>
+            <a :href="product.whatsapp" target="_blank" rel="noopener" class="px-3 py-2 rounded border border-gray-800 text-sm">WhatsApp</a>
+            <a :href="product.email" class="px-3 py-2 rounded border border-orange-500 text-sm">Email</a>
+            <a v-if="product.cta" :href="product.cta" target="_blank" rel="noopener" class="px-3 py-2 rounded border border-gray-800 text-sm">Buy</a>
           </div>
         </div>
       </article>
     </div>
 
     <div class="mt-10 text-sm text-gray-400">Note: replace placeholder images and links with your store system (Shopify/Stripe/checkout links).</div>
+
+    <!-- noscript fallback (shows a simple message or static content for non-js users) -->
+    <noscript>
+      <div class="mt-6 p-4 bg-[#071015] border border-gray-800 rounded text-gray-400">
+        JavaScript is disabled — enable JS to see the full product list. (Alternatively include server-rendered product cards here.)
+      </div>
+    </noscript>
   </main>
+
+  <!-- Vue 3 CDN (global build) -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    const { createApp, computed } = Vue;
+
+    createApp({
+      data() {
+        return {
+          query: '',
+          products: [
+            {
+              id: 1,
+              title: "Polo blanc plus bonnet",
+              price: 13000,
+              description: "Coton de qualité supérieure, Édition limitée.",
+              image: "static/assets/01.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Poster",
+              cta: ""
+            },
+            {
+              id: 2,
+              title: "Pull de couleur rose",
+              price: 10000,
+              description: "Coton de qualité supérieure, logo brodé. Édition limitée.",
+              image: "static/assets/02.webp",
+              whatsapp: "https://wa.me/237600000001?text=Bonjour%20je%20veux%20acheter%20le%20Pull%20rose",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Pull%20rose",
+              cta: ""
+            },
+            {
+              id: 3,
+              title: "Casquette de différentes couleurs",
+              price: 5000,
+              description: "Coton de qualité, sangle réglable.",
+              image: "static/assets/03.webp",
+              whatsapp: "https://wa.me/237600000002?text=Bonjour%20je%20veux%20acheter%20la%20Casquette",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Casquette",
+              cta: ""
+            },
+            // add more products here
+            {
+              id: 4,
+              title: "T-shirt couleur bleue",
+              price: 7000,
+              description: "Coton de qualité supérieure, Édition limitée.",
+              image: "static/assets/04.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Vinyl",
+              cta: ""
+            },
+            {
+              id: 5,
+              title: "Polo couleur verte",
+              price: 10000,
+              description: "Coton de qualité supérieure, Édition limitée.",
+              image: "static/assets/05.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Poster",
+              cta: ""
+            },
+            {
+              id: 6,
+              title: "T-shirt couleur bleue",
+              price: 7000,
+              description: "Coton de qualité supérieure, Édition limitée.",
+              image: "static/assets/06.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Vinyl",
+              cta: ""
+            },
+            {
+              id: 7,
+              title: "Polo couleur verte",
+              price: 10000,
+              description: "Coton de qualité supérieure, Édition limitée.",
+              image: "static/assets/07.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Poster",
+              cta: ""
+            },
+            {
+              id: 8,
+              title: "T-shirt blanc plus casquette",
+              price: 11000,
+              description: "Coton de qualité, sangle réglable.",
+              image: "static/assets/08.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Poster",
+              cta: ""
+            },
+            {
+              id: 9,
+              title: "Pull noir plus casquette",
+              price: 13000,
+              description: "Coton de qualité supérieure, Édition limitée.",
+              image: "static/assets/09.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Vinyl",
+              cta: ""
+            },
+            {
+              id: 10,
+              title: "Polo couleur bleue",
+              price: 10000,
+              description: "Coton de qualité supérieure, logo brodé. Édition limitée.",
+              image: "static/assets/10.webp",
+              whatsapp: "https://wa.me/237600000000?text=Bonjour%20je%20veux%20acheter%20le%20Polo%20couleur%20bleue",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Polo%20bleu",
+              cta: "" // optional direct buy link
+            }
+          ]
+        }
+      },
+      computed: {
+        filtered() {
+          const q = this.query.trim().toLowerCase();
+          if (!q) return this.products;
+          return this.products.filter(p =>
+            p.title.toLowerCase().includes(q) ||
+            p.description.toLowerCase().includes(q)
+          );
+        }
+      },
+      methods: {
+        formatPrice(value) {
+          if (typeof value === 'number') {
+            // e.g. "10,000 FCFA"
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " FCFA";
+          }
+          return value;
+        }
+      }
+    }).mount('#app');
+  </script>
 </body>
 </html>
-
