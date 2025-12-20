@@ -14,6 +14,42 @@
     .container-max{max-width:1180px;margin-left:auto;margin-right:auto}
     .product-card{background:#071015;border:1px solid rgba(255,255,255,0.03);border-radius:12px;overflow:hidden}
     .price { color: #ffd7a8; }
+
+    /* The base skeleton block */
+    .skeleton {
+      background: #0d1a21;
+      background: linear-gradient(
+        90deg, 
+        #0d1a21 25%, 
+        #16252d 50%, 
+        #0d1a21 75%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 4px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Skeleton layouts */
+    .skeleton-image {
+      width: 100%;
+      height: 256px; /* Match your img h-64 */
+      border-radius: 12px 12px 0 0;
+    }
+
+    .skeleton-text {
+      height: 14px;
+      margin-bottom: 8px;
+    }
+
+    .skeleton-title {
+      width: 60%;
+      height: 20px;
+    }
   </style>
 </head>
 <body>
@@ -47,17 +83,39 @@
     <!-- product grid -->
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <article v-for="product in filtered" :key="product.id" class="product-card">
-        <img :src="product.image" :alt="product.title" class="w-full h-64 lg:h-72 object-cover">
-        <div class="p-4">
-          <div class="flex items-center justify-between">
-            <div class="font-semibold">{{ product.title }}</div>
-            <div class="text-lg font-bold price">{{ formatPrice(product.price) }}</div>
+        <div v-if="!product.loaded">
+          <div class="skeleton skeleton-image"></div>
+          <div class="p-4">
+            <div class="flex justify-between mb-4">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton w-16 h-5"></div>
+            </div>
+            <div class="skeleton skeleton-text w-full"></div>
+            <div class="skeleton skeleton-text w-5/6"></div>
+            <div class="flex gap-3 mt-4">
+              <div class="skeleton w-20 h-8 rounded"></div>
+              <div class="skeleton w-20 h-8 rounded"></div>
+            </div>
           </div>
-          <p class="mt-2 text-sm text-gray-400">{{ product.description }}</p>
-          <div class="mt-4 flex gap-3">
-            <a :href="product.whatsapp" target="_blank" rel="noopener" class="px-3 py-2 rounded border border-gray-800 text-sm">WhatsApp</a>
-            <a :href="product.email" class="px-3 py-2 rounded border border-orange-500 text-sm">Email</a>
-            <a v-if="product.cta" :href="product.cta" target="_blank" rel="noopener" class="px-3 py-2 rounded border border-gray-800 text-sm">Buy</a>
+        </div>
+
+        <div v-show="product.loaded">
+          <img 
+            :src="product.image" 
+            :alt="product.title" 
+            @load="product.loaded = true"
+            class="w-full h-64 lg:h-72 object-cover"
+          >
+          <div class="p-4">
+            <div class="flex items-center justify-between">
+              <div class="font-semibold">{{ product.title }}</div>
+              <div class="text-lg font-bold price">{{ formatPrice(product.price) }}</div>
+            </div>
+            <p class="mt-2 text-sm text-gray-400">{{ product.description }}</p>
+            <div class="mt-4 flex gap-3">
+              <a :href="product.whatsapp" class="px-3 py-2 rounded border border-gray-800 text-sm">WhatsApp</a>
+              <a :href="product.email" class="px-3 py-2 rounded border border-orange-500 text-sm">Email</a>
+            </div>
           </div>
         </div>
       </article>
@@ -197,6 +255,14 @@
           );
         }
       },
+
+      created() {
+        // This ensures every product starts in a "loading" state
+        this.products.forEach(p => {
+          p.loaded = false;
+        });
+      },
+
       methods: {
         formatPrice(value) {
           if (typeof value === 'number') {
