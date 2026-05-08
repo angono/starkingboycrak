@@ -1,12 +1,11 @@
-
 <!-- songs.html -->
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Music — Starking Boycrak</title>
-  <meta name="description" content="Stream and download Starking Boycrak's music." />
+  <title>Musique — Starking Boycrak</title>
+  <meta name="description" content="Écoutez et téléchargez la musique de Starking Boycrak." />
 
   <link rel="stylesheet" type="text/css" href="static/style.css">
 
@@ -15,14 +14,26 @@
 </head>
 <body>
   <header class="container-max px-6 py-6 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#2a0b2f] to-[#1f0a18] flex items-center justify-center" style="color:var(--amber);font-weight:700">SB</div><div><div class="font-semibold">Starking Boycrak</div><div class="text-xs text-gray-400">Official</div></div></a>
-    <nav class="hidden lg:flex gap-6 text-sm text-gray-200"><a href="songs.html" class="font-semibold">Music</a><a href="shop.html">Shop</a><a href="services.html">Services</a></nav>
-    <a href="mailto:booking@starkingboycrak.com" class="px-4 py-2 rounded bg-amber text-gray-400 text-sm">Book</a>
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#2a0b2f] to-[#1f0a18] flex items-center justify-center" style="color:var(--amber);font-weight:700">SB</div>
+      <div>
+        <div class="font-semibold">Starking Boycrak</div>
+        <div class="text-xs text-gray-400">Officiel</div>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex gap-6 text-sm text-gray-200">
+      <a href="songs.html" class="font-semibold">Musique</a>
+      <a href="shop.html">Boutique</a>
+      <a href="services.html">Services</a>
+    </nav>
+
+    <a href="mailto:booking@starkingboycrak.com" class="px-4 py-2 rounded bg-amber text-gray-400 text-sm">Réserver</a>
   </header>
 
   <main class="container-max px-6 pb-16">
-    <h1 class="text-3xl font-semibold mt-6">Music</h1>
-    <p class="text-gray-400 mt-2">Official tracks and albums.</p>
+    <h1 class="text-3xl font-semibold mt-6">Musique</h1>
+    <p class="text-gray-400 mt-2">Morceaux et albums officiels.</p>
 
     <section class="mt-8 space-y-5">
       <article class="p-4 bg-[#071015] rounded-xl border border-gray-800 flex items-center gap-4">
@@ -37,7 +48,7 @@
       </article>
 
       <article class="p-4 bg-[#071015] rounded-xl border border-gray-800 flex items-center gap-4">
-        <img src="static/assets/music-icon.webp" alt="Lumiere" class="w-20 h-20 object-cover rounded" />
+        <img src="static/assets/music-icon.webp" alt="Lumière" class="w-20 h-20 object-cover rounded" />
         <div class="flex-1">
           <div class="font-semibold">Lumière, Caméra, Action</div>
           <div class="text-sm text-gray-400">Single • 4:05</div>
@@ -48,8 +59,9 @@
       </article>
     </section>
 
-    <div class="mt-8 text-sm text-gray-400">Tip: host audio files on S3, Cloudflare R2, or a streaming provider and update the <code>src</code> URLs above.</div>
+    <div class="mt-8 text-sm text-gray-400">
+      Astuce : hébergez les fichiers audio sur S3, Cloudflare R2 ou un fournisseur de streaming, puis mettez à jour les URLs <code>src</code> ci-dessus.
+    </div>
   </main>
 </body>
 </html>
-

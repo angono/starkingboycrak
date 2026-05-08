@@ -1,260 +1,286 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop — Starking Boycrak</title>
+  <!-- Meta description -->
+  <meta name="description" content="Produits officiels et éditions limitées de Starking Boycrak." />
 
-        <!-- Google tag (gtag.js) --> 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MDL0PQB3T"></script> 
-        <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-8MDL0PQB3T'); </script>
+  <link rel="stylesheet" type="text/css" href="static/style.css">
 
-        <!-- GOOGLE ADSENSE -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9550786329569592" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-ink:#060507;--amber:#ff8a00;--glass:rgba(255,255,255,0.04);}html,body{height:100%;background:linear-gradient(180deg,var(--bg-ink),#0b0b0d 60%);color:#e6edf0;font-family:'Space Grotesk',system-ui;}
+    .container-max{max-width:1180px;margin-left:auto;margin-right:auto}
+    .product-card{background:#071015;border:1px solid rgba(255,255,255,0.03);border-radius:12px;overflow:hidden}
+    .price { color: #ffd7a8; }
 
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    /* The base skeleton block */
+    .skeleton {
+      background: #0d1a21;
+      background: linear-gradient(
+        90deg, 
+        #0d1a21 25%, 
+        #16252d 50%, 
+        #0d1a21 75%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 4px;
+    }
 
-        <title>Starking Boycrak - Boutique</title>
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
 
-        <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" sizes="any" />
-        <link rel="shortcut icon" href="static/assets/logo.png">
+    /* Skeleton layouts */
+    .skeleton-image {
+      width: 100%;
+      height: 256px; /* Match your img h-64 */
+      border-radius: 12px 12px 0 0;
+    }
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    .skeleton-text {
+      height: 14px;
+      margin-bottom: 8px;
+    }
 
-        <link rel="manifest" href="/manifest.json">
+    .skeleton-title {
+      width: 60%;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header class="container-max px-6 py-6 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#2a0b2f] to-[#1f0a18] flex items-center justify-center" style="color:var(--amber);font-weight:700">SB</div>
+      <div>
+        <div class="font-semibold">Starking Boycrak</div>
+        <div class="text-xs text-gray-400">Officiel</div>
+      </div>
+    </a>
+    <nav class="hidden lg:flex gap-6 text-sm text-gray-200">
+      <a href="songs.html">Musique</a>
+      <a href="shop.html" class="font-semibold">Boutique</a>
+      <a href="services.html">Services</a>
+    </nav>
+    <a href="mailto:booking@starkingboycrak.com" class="px-4 py-2 rounded bg-amber text-gray-800 text-sm">Réserver</a>
+  </header>
 
-        <meta name="description" content="Artiste, Rappeur, Compositeur, Starking Boycrak"/>
-        <meta name="author" content="Starking Boycrak"/>
-        
-        <meta name="keywords" content="Starking Boycrak, Starking, Boycrak, Ledocstarking, Le docs records, Star centrafricaine, Bangui, RCA, Africa, Artiste, Rappeur, Compositeur, République centrafricaine, Afrique, Hashtag, Studio, Best studio, Singing studio, Recording songs, Musique, Music, Starking brand, Hors catégorie"/>
+  <!-- Vue app root -->
+  <main id="app" class="container-max px-6 pb-16">
+    <h1 class="text-3xl font-semibold mt-6">Boutique</h1>
+    <p class="text-gray-400 mt-2">Produits dérivés officiels sélectionnés avec soin et éditions limitées.</p>
 
-        <meta property="og:url" content="https://angono.github.io/starking/"/>
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Starking Boycrak"/>
-        <meta property="og:description" content="Artiste, Rappeur, Compositeur"/>
-        <meta property="og:image" content="https://starkingboycrak.com/static/assets/logo.png"/>
+    <!-- Optional small search or quick filter -->
+    <div class="mt-6 flex items-center gap-4">
+      <input v-model="query" type="search" placeholder="Rechercher des produits..." class="bg-[#071015] border border-gray-800 rounded px-3 py-2 text-sm w-full max-w-xs" />
+      <div class="text-sm text-gray-400">
+        Affichage de <strong class="text-white">{{ filtered.length }}</strong> produit(s)
+      </div>
+    </div>
 
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" defer></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="static/css/styles.css" rel="stylesheet" />
-        <link href="static/css/custom.css" rel="stylesheet" />
-
-        <style type="text/css">
-            /* For large screens */
-            @media (min-width: 992px) {
-              .image-container {
-                height: 400px;
-                width: 100%;
-              }
-            }
-
-            /* For small screens */
-            @media (max-width: 991.98px) {
-              .image-container {
-                height: 225px;
-                width: 100%;
-              }
-            }
-
-            /* Additional styling */
-            .image-container img {
-              width: 100%;
-              height: auto;
-            }
-        </style>
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">Starking Boycrak</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="shop.html">Boutique</a></li>
-                        <li class="nav-item"><a class="nav-link" href="music.html">Musique</a></li>
-                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                    </ul>
-                </div>
+    <!-- product grid -->
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article v-for="product in filtered" :key="product.id" class="product-card">
+        <div v-if="!product.loaded">
+          <div class="skeleton skeleton-image"></div>
+          <div class="p-4">
+            <div class="flex justify-between mb-4">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton w-16 h-5"></div>
             </div>
-        </nav>
-        
-        <!-- About-->
-        <section class="about-section text-center" id="about">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8">
-                        <h1 class="text-white mb-4">Boutique en <span class="text-teal">Style</span></h1>
-                        <p class="text-white-50">Achetez le style signature de Starking Boycrak! 🛍🛒</p>
-                    </div>
-                </div>
+            <div class="skeleton skeleton-text w-full"></div>
+            <div class="skeleton skeleton-text w-5/6"></div>
+            <div class="flex gap-3 mt-4">
+              <div class="skeleton w-20 h-8 rounded"></div>
+              <div class="skeleton w-20 h-8 rounded"></div>
             </div>
-        </section>
+          </div>
+        </div>
 
-        <section class="shop-section text-center" id="shop-section">
-            <div class="container px-4 px-lg-5">
-                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-3 g-lg-5">
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(0);" onclick="shareOnWhatsApp('Polo couleur bleue à 10,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/01.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">Pull</h1>
-                                <a href="javascript:void(0);" onclick="shareOnWhatsApp('Polo couleur bleue à 10,000 FCFA')" target="_blank" class="card-text text-reset">Polo couleur bleue</a>
-                                <h5 class="fs-5 fw-bold mt-2">10,000 FCFA</h5>
-
-                                <a href="javascript:void(0);" onclick="shareOnWhatsApp('Polo couleur bleue à 10,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(1);" onclick="shareOnWhatsApp('Pull de couleur rose à 10,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/02.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">Pull</h1>
-                                <a href="javascript:void(1);" onclick="shareOnWhatsApp('Pull de couleur rose à 10,000 FCFA')" target="_blank" class="card-text text-reset">Pull de couleur rose</a>
-                                <h5 class="fs-5 fw-bold mt-2">10,000 FCFA</h5>
-
-                                <a href="javascript:void(1);" onclick="shareOnWhatsApp('Pull de couleur rose à 10,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(2);" onclick="shareOnWhatsApp('Casquette à 5,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/03.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">Casquette</h1>
-                                <a href="javascript:void(2);" onclick="shareOnWhatsApp('Casquette à 5,000 FCFA')" target="_blank" class="card-text text-reset">Casquette de differentes couleures</a>
-                                <h5 class="fs-5 fw-bold mt-2">5,000 FCFA</h5>
-
-                                <a href="javascript:void(2);" onclick="shareOnWhatsApp('Casquette à 5,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(3);" onclick="shareOnWhatsApp('T-shirt couleur bleue à 7,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/04.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">T-shirt</h1>
-                                <a href="javascript:void(3);" onclick="shareOnWhatsApp('T-shirt couleur bleue à 7,000 FCFA')" target="_blank" class="card-text text-reset">T-shirt couleur bleue</a>
-                                <h5 class="fs-5 fw-bold mt-2">7,000 FCFA</h5>
-
-                                <a href="javascript:void(3);" onclick="shareOnWhatsApp('T-shirt couleur bleue à 7,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(4);" onclick="shareOnWhatsApp('Polo couleur verte à 10,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/05.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">Polo</h1>
-                                <a href="javascript:void(4);" onclick="shareOnWhatsApp('Polo couleur verte à 10,000 FCFA')" target="_blank" class="card-text text-reset">Polo couleur verte</a>
-                                <h5 class="fs-5 fw-bold mt-2">10,000 FCFA</h5>
-
-                                <a href="javascript:void(4);" onclick="shareOnWhatsApp('Polo couleur verte à 10,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(5);" onclick="shareOnWhatsApp('Polo noir plus casquette à 13,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/06.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">Polo + Casquette</h1>
-                                <a href="javascript:void(5);" onclick="shareOnWhatsApp('Polo noir plus casquette à 13,000 FCFA')" target="_blank" class="card-text text-reset">Polo noir plus casquette</a>
-                                <h5 class="fs-5 fw-bold mt-2">13,000 FCFA</h5>
-
-                                <a href="javascript:void(5);" onclick="shareOnWhatsApp('Polo noir plus casquette à 13,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(6);" onclick="shareOnWhatsApp('Pull couleur grise à 10,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/07.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">Pull</h1>
-                                <a href="javascript:void(6);" onclick="shareOnWhatsApp('Pull couleur grise à 10,000 FCFA')" target="_blank" class="card-text text-reset">Pull couleur grise</a>
-                                <h5 class="fs-5 fw-bold mt-2">10,000 FCFA</h5>
-
-                                <a href="javascript:void(6);" onclick="shareOnWhatsApp('Pull couleur grise à 10,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(7);" onclick="shareOnWhatsApp('T-shirt blanc plus casquette à 11,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/08.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">T-shirt + Casquette</h1>
-                                <a href="javascript:void(7);" onclick="shareOnWhatsApp('T-shirt blanc plus casquette à 11,000 FCFA')" target="_blank" class="card-text text-reset">T-shirt blanc plus casquette</a>
-                                <h5 class="fs-5 fw-bold mt-2">11,000 FCFA</h5>
-
-                                <a href="javascript:void(7);" onclick="shareOnWhatsApp('T-shirt blanc plus casquette à 11,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(8);" onclick="shareOnWhatsApp('Pull noir plus casquette à 13,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/09.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">Pull + Casquette</h1>
-                                <a href="javascript:void(8);" onclick="shareOnWhatsApp('Pull noir plus casquette à 13,000 FCFA')" target="_blank" class="card-text text-reset">Pull noir plus casquette</a>
-                                <h5 class="fs-5 fw-bold mt-2">13,000 FCFA</h5>
-
-                                <a href="javascript:void(8);" onclick="shareOnWhatsApp('Pull noir plus casquette à 13,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="javascript:void(9);" onclick="shareOnWhatsApp('Polo blanc plus bonnet à 13,000 FCFA')" target="_blank"><img class="img-thumbnail image-container" src="static/assets/shop/10.jpg" loading="lazy" alt="..."></a>
-                            <div class="card-body">
-                                <h1 class="fs-5 text-primary fw-bold">Polo + Bonnet</h1>
-                                <a href="javascript:void(9);" onclick="shareOnWhatsApp('Polo blanc plus bonnet à 13,000 FCFA')" target="_blank" class="card-text text-reset">Polo blanc plus bonnet</a>
-                                <h5 class="fs-5 fw-bold mt-2">13,000 FCFA</h5>
-
-                                <a href="javascript:void(9);" onclick="shareOnWhatsApp('Polo blanc plus bonnet à 13,000 FCFA')" target="_blank">WhatsApp</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div v-show="product.loaded">
+          <img 
+            :src="product.image" 
+            :alt="product.title" 
+            @load="product.loaded = true"
+            class="w-full h-64 lg:h-72 object-cover"
+          >
+          <div class="p-4">
+            <div class="flex items-center justify-between">
+              <div class="font-semibold">{{ product.title }}</div>
+              <div class="text-lg font-bold price">{{ formatPrice(product.price) }}</div>
             </div>
-        </section>
-       
+            <p class="mt-2 text-sm text-gray-400">{{ product.description }}</p>
+            <div class="mt-4 flex gap-3">
+              <a :href="product.whatsapp" class="px-3 py-2 rounded border border-gray-800 text-sm">WhatsApp</a>
+              <a :href="product.email" class="px-3 py-2 rounded border border-orange-500 text-sm">
+                Par Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
 
-        <!-- Footer-->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy;Starking Boycrak 2024</div></footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
-        <!-- Core theme JS-->
-        <script src="static/js/bootstrap.min.js" defer></script>
+    <!-- Bottom note -->
+    <div class="mt-10 text-base text-orange-500">
+      N’hésitez pas à nous contacter pour passer votre commande.
+    </div>
 
-        <script>
-            function shareOnWhatsApp(productName) {
-                var text = "Je voudrais commander ce produit: " + productName;
-                var phoneNumber = "+22960627890"; // WhatsApp number
-                var whatsappUrl = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(text);
-                window.open(whatsappUrl);
+    <!-- noscript fallback (shows a simple message or static content for non-js users) -->
+    <noscript>
+      <div class="mt-6 p-4 bg-[#071015] border border-gray-800 rounded text-gray-400">
+        JavaScript est désactivé — activez JavaScript pour voir la liste complète des produits.
+      </div>
+    </noscript>
+  </main>
+
+  <!-- Vue 3 CDN (global build) -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    const { createApp, computed } = Vue;
+
+    createApp({
+      data() {
+        return {
+          query: '',
+          products: [
+            {
+              id: 1,
+              title: "Polo blanc avec bonnet",
+              price: 13000,
+              description: "Confection en coton premium • Édition limitée",
+              image: "static/shop/01.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Poster",
+              cta: ""
+            },
+            {
+              id: 2,
+              title: "Pull rose",
+              price: 10000,
+              description: "Coton premium avec logo brodé • Édition limitée",
+              image: "static/shop/02.webp",
+              whatsapp: "https://wa.me/237600000001?text=Bonjour%20je%20veux%20acheter%20le%20Pull%20rose",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Pull%20rose",
+              cta: ""
+            },
+            {
+              id: 3,
+              title: "Casquette multicolore",
+              price: 5000,
+              description: "Coton de qualité avec sangle ajustable",
+              image: "static/shop/03.webp",
+              whatsapp: "https://wa.me/237600000002?text=Bonjour%20je%20veux%20acheter%20la%20Casquette",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Casquette",
+              cta: ""
+            },
+            // add more products here
+            {
+              id: 4,
+              title: "T-shirt bleu",
+              price: 7000,
+              description: "Confection en coton premium • Édition limitée",
+              image: "static/shop/04.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Vinyl",
+              cta: ""
+            },
+            {
+              id: 5,
+              title: "Polo vert",
+              price: 10000,
+              description: "Confection en coton premium • Édition limitée",
+              image: "static/shop/05.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Poster",
+              cta: ""
+            },
+            {
+              id: 6,
+              title: "T-shirt bleu",
+              price: 7000,
+              description: "Confection en coton premium • Édition limitée",
+              image: "static/shop/06.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Vinyl",
+              cta: ""
+            },
+            {
+              id: 7,
+              title: "Polo vert",
+              price: 10000,
+              description: "Confection en coton premium • Édition limitée",
+              image: "static/shop/07.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Poster",
+              cta: ""
+            },
+            {
+              id: 8,
+              title: "Pack T-shirt blanc & casquette",
+              price: 11000,
+              description: "Coton de qualité avec sangle ajustable",
+              image: "static/shop/08.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Poster",
+              cta: ""
+            },
+            {
+              id: 9,
+              title: "Pack pull noir & casquette",
+              price: 13000,
+              description: "Confection en coton premium • Édition limitée",
+              image: "static/shop/09.webp",
+              whatsapp: "#",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Vinyl",
+              cta: ""
+            },
+            {
+              id: 10,
+              title: "Polo bleu",
+              price: 10000,
+              description: "Coton premium avec logo brodé • Édition limitée",
+              image: "static/shop/10.webp",
+              whatsapp: "https://wa.me/237600000000?text=Bonjour%20je%20veux%20acheter%20le%20Polo%20couleur%20bleue",
+              email: "mailto:shop@starkingboycrak.com?subject=Commande%20Polo%20bleu",
+              cta: "" // optional direct buy link
             }
-        </script>
+          ]
+        }
+      },
+      computed: {
+        filtered() {
+          const q = this.query.trim().toLowerCase();
+          if (!q) return this.products;
+          return this.products.filter(p =>
+            p.title.toLowerCase().includes(q) ||
+            p.description.toLowerCase().includes(q)
+          );
+        }
+      },
 
-<script>
-if ('serviceWorker' in navigator) {
-window.addEventListener('load', function() {
-  navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-  }, function(error) {
-    console.log('ServiceWorker registration failed: ', error);
-  });
-});
-}
-</script>
+      created() {
+        // This ensures every product starts in a "loading" state
+        this.products.forEach(p => {
+          p.loaded = false;
+        });
+      },
 
-
-    </body>
+      methods: {
+        formatPrice(value) {
+          if (typeof value === 'number') {
+            // e.g. "10,000 FCFA"
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " FCFA";
+          }
+          return value;
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
 </html>

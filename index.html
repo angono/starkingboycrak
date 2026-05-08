@@ -1,246 +1,315 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <!-- Google tag (gtag.js) --> 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MDL0PQB3T"></script> 
-        <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-8MDL0PQB3T'); </script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Starking Boycrak — Official</title>
+  <meta name="description" content="Starking Boycrak — Musique, galerie, projets et contact." />
+
+  <link rel="stylesheet" type="text/css" href="static/style.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-ink: #060507;
+      --amber: #ff8a00;
+      --glass: rgba(255,255,255,0.04);
+      --muted: #9ca3af;
+    }
+
+    html,body {
+      height:100%;
+      background: linear-gradient(180deg,var(--bg-ink), #0b0b0d 60%);
+      color:#e6edf0;
+      font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Hero wordmark & sheen */
+    .hero-mark { font-family:'Cinzel', serif; letter-spacing:.18em; font-weight:900; -webkit-text-stroke:1.6px rgba(255,255,255,0.06); text-transform:uppercase; }
+    .sheen::after{
+      content:"";
+      position:absolute; left:-60%; top:0; height:100%; width:60%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      transform: skewX(-18deg);
+      animation:sweep 5s linear infinite;
+      mix-blend-mode:overlay;
+      pointer-events:none;
+    }
+    @keyframes sweep { 0%{left:-60%} 100%{left:160%} }
+    .vignette { box-shadow: inset 0 120px 120px -60px rgba(0,0,0,0.7), inset 0 -60px 80px -40px rgba(0,0,0,0.8); }
+
+    .pill { background: linear-gradient(90deg, rgba(255,138,0,0.12), rgba(255,138,0,0.06)); border:1px solid rgba(255,138,0,0.14); color:var(--amber); }
+
+    .accent-underline { height:3px; width:84px; background:linear-gradient(90deg,var(--amber), #ffd58a); border-radius:999px; margin-top:.75rem; }
+
+    /* masonry gallery */
+    .masonry { column-count: 3; column-gap: 1rem; }
+    @media (max-width:1024px){ .masonry{ column-count:2 } }
+    @media (max-width:640px){ .masonry{ column-count:1 } }
+    .masonry figure { break-inside: avoid; margin:0 0 1rem; overflow:hidden; border-radius:12px; position:relative; }
+    .masonry img { width:100%; display:block; transition:transform .6s ease, filter .45s ease; transform-origin:center; filter:grayscale(.18) contrast(.98); }
+    .masonry figure:hover img { transform: scale(1.04); filter:grayscale(0) contrast(1.03) saturate(1.03); }
+
+    .project { position:relative; overflow:hidden; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06)); border:1px solid rgba(255,255,255,0.03); }
+    .project .meta { position:absolute; left:0; right:0; bottom:0; padding:1.25rem; background:linear-gradient(180deg,transparent,rgba(0,0,0,0.55)); transform:translateY(36%); opacity:0; transition:all .4s ease; }
+    .project:hover .meta { transform:translateY(0); opacity:1; }
+
+    .glass { background:var(--glass); backdrop-filter: blur(6px); border:1px solid rgba(255,255,255,0.03); }
+    .container-max { max-width:1180px; margin-left:auto; margin-right:auto; }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT -->
+  <div class="w-full py-2 border-b border-gray-800">
+    <div class="container-max px-6 flex items-center justify-between">
+      <div class="text-xs pill px-3 py-1 rounded-full font-medium" role="status" aria-live="polite">
+        NOUVEAU — Single disponible maintenant :
+        <strong class="ml-2">Badass</strong>
+      </div>
+
+      <div class="text-xs text-gray-400">
+        Réservations ouvertes
+      </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 glass">
+    <div class="container-max px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#2a0b2f] to-[#1f0a18] flex items-center justify-center" style="color:var(--amber); font-weight:700">SB</div>
+        <div>
+          <div class="font-semibold">Starking Boycrak</div>
+          <div class="text-xs text-gray-400">Officiel</div>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-sm text-gray-200" role="navigation" aria-label="Primary">
+        <a href="songs.html" class="hover:text-white">Musique</a>
+        <a href="shop.html" class="hover:text-white">Boutique</a>
+        <a href="services.html" class="hover:text-white">Services</a>
+        <a href="#gallery" class="hover:text-white">Galerie</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="mailto:booking@starkingboycrak.com"
+          class="px-4 py-2 rounded-md bg-amber text-gray-400 font-semibold text-sm">
+          Réserver
+        </a>
 
 
-        <!-- GOOGLE ADSENSE -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9550786329569592" crossorigin="anonymous"></script>
+        <!-- Mobile menu (details) -->
+        <details class="lg:hidden relative">
+          <summary class="list-none text-gray-200 px-3 py-2 rounded-md cursor-pointer">Menu ▾</summary>
+          <div class="absolute right-0 mt-2 w-48 bg-[#09080a] border border-gray-800 rounded-md shadow-lg p-3">
+            <a href="songs.html" class="block py-2 text-sm">Musique</a>
+            <a href="shop.html" class="block py-2 text-sm">Boutique</a>
+            <a href="services.html" class="block py-2 text-sm">Services</a>
+            <a href="#gallery" class="block py-2 text-sm">Galerie</a>
+            <a href="mailto:booking@starkingboycrak.com" class="block py-2 text-sm">Réservation</a>
+          </div>
+        </details>
+      </div>
+    </div>
+  </header>
 
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        
-        <title>Starking Boycrak - Accueil</title>
+  <!-- HERO -->
+  <main>
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0" style="background:linear-gradient(120deg, rgba(27,11,43,0.6), rgba(6,5,7,0.6)); mix-blend-mode:multiply;"></div>
 
-        <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" sizes="any" />
-        <link rel="shortcut icon" href="static/assets/logo.png">
-
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-        <link rel="manifest" href="/manifest.json">
-
-        <meta name="description" content="Artiste, Rappeur, Compositeur, Starking Boycrak"/>
-        <meta name="author" content="Starking Boycrak"/>
-        
-        <meta name="keywords" content="Starking Boycrak, Starking, Boycrak, Ledocstarking, Le docs records, Star centrafricaine, Bangui, RCA, Africa, Artiste, Rappeur, Compositeur, République centrafricaine, Afrique, Hashtag, Studio, Best studio, Singing studio, Recording songs, Musique, Music, Starking brand, Hors catégorie"/>
-
-        <meta property="og:url" content="https://angono.github.io/starking/"/>
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Starking Boycrak"/>
-        <meta property="og:description" content="Artiste, Rappeur, Compositeur"/>
-        <meta property="og:image" content="https://starkingboycrak.com/static/assets/logo.png"/>
-
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" defer ></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="static/css/styles.css" rel="stylesheet" />
-        <link href="static/css/custom.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">Starking Boycrak</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="shop.html">Boutique</a></li>
-                        <li class="nav-item"><a class="nav-link" href="music.html">Musique</a></li>
-                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                    </ul>
-                </div>
+      <div class="container-max px-6 py-20 lg:py-28 relative z-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <!-- Left: copy -->
+          <div>
+            <div class="hero-mark text-orange-500 text-4xl md:text-5xl lg:text-7xl leading-tight">
+              STARKING
             </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-                <div class="d-flex justify-content-center">
-                    <div class="text-center">
-                        <h1 class="mx-auto my-0 text-uppercase">Starking</h1>
-                        <h2 class="text-white-50 mx-auto mt-2 mb-5">Bienvenue sur le site officiel de Starking Boycrak – la destination ultime des fans engagés, des amateurs de la musique centrafricaine et la signature de Starking Boycrak! 🎤</h2>
-                        <a class="btn btn-primary rounded-5" href="#about">Faire défiler!</a>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- About-->
-        <section class="about-section text-center" id="about">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2 class="text-white mb-4">Starking <span class="text-teal">Boycrak</span></h2>
-                        <p class="text-white-50">Starking Boycrak de son vrai nom King Succes Dieu-vit Exel CEO du label de production (Le Doc Records) est un artiste rappeur et producteur centrafricain.
-                        </p>
-                    </div>
-                </div>
-                <img class="img-fluid mb-4 rounded" src="static/assets/img/record.png" alt="record"/>
-            </div>
-        </section>
-        <!-- Projects-->
-        <section class="projects-section bg-light" id="projects">
-            <div class="container px-4 px-lg-5">
-                <!-- Featured Project Row-->
-                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0 rounded" src="static/assets/starking.jpg" loading="lazy" alt="Starking Boycrak" /></div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="featured-text text-center text-lg-left">
-                            <h4>Ne Jamais Abandonner</h4>
-                            <p class="text-black-50 mb-0">N'abandonnez jamais votre voyage musical. Embrassez chaque note, surmontez chaque défi et laissez votre passion vous guider vers la grandeur. Ensemble, nous élevons.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project One Row-->
-                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="static/assets/01.jpg" loading="lazy" alt="..." /></div>
-                    <div class="col-lg-6">
-                        <div class="bg-black text-center h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white">Lumière, caméra, action!</h4>
-                                    <p class="mb-0 text-white-50">Ressentez le rythme, ressentez l'ambiance. Bienvenue au concert de votre vie! 🎵</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project Two Row-->
-                <div class="row gx-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="static/assets/02.jpg" loading="lazy" alt="..." /></div>
-                    <div class="col-lg-6 order-lg-first">
-                        <div class="bg-black text-center h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white">Volume à fond!</h4>
-                                    <p class="mb-0 text-white-50">Préparez-vous à chanter et rocker toute la nuit! Bienvenue sur la scène des concerts de Starking Boycrak. 🎶</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Signup-->
-        <section class="signup-section" id="signup">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-md-10 col-lg-8 mx-auto text-center">
-                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                        <h2 class="text-white h3 mb-5">Abonnez-vous pour recevoir des mises à jour!</h2>
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-                        <form class="form-signup" id="contactForm">
-                            <!-- Email address input-->
-                            <div class="row input-group-newsletter">
-                                <div class="col"><input class="form-control" id="emailAddress" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                                <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Informez-moi!</button></div>
-                            </div>
-                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">Un e-mail est requis.</div>
-                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">L'email n'est pas valide.</div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3 mt-2 text-white">
-                                    <div class="fw-bolder">Envoi du formulaire réussi!</div>Pour activer ce formulaire, inscrivez-vous sur
-                                    <br />
-                                    <a href="https://starkingboycrak.com">https://starkingboycrak.com</a>
-                                </div>
-                            </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Erreur lors de l'envoi du message!</div></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Contact-->
-        <section class="contact-section bg-black text-center">
-            <div class="container px-4 px-lg-5">
-                <h2 class="text-white mb-5">Projet <span class="text-teal">en cours</span></h2>
 
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 mb-3 mb-md-0">
-                        <div class="card h-100">
-                            <img class="img-fluid h-100 card-img border border-success" src="static/assets/music/m1.jpg" loading="lazy" alt="..."/>
-                            <!-- <div class="card-body text-center">
-                                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">Address</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">4923 Market Street, Orlando FL</div>
-                            </div> -->
-                        </div>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 mb-3 mb-md-0">
-                        <div class="card h-100">
-                            <img class="img-fluid h-100 card-img border border-success" src="static/assets/music/m2.jpg" loading="lazy" alt="..."/>
-                            <!-- <div class="card-body text-center">
-                                <i class="fas fa-envelope text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">Email</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
-                            </div> -->
-                        </div>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 mb-3 mb-md-0">
-                        <div class="card h-100">
-                            <img class="img-fluid h-100 card-img border border-success" src="static/assets/music/m3.jpg" loading="lazy" alt="..."/>
-                            <!-- <div class="card-body text-center">
-                                <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">Phone</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">+1 (555) 902-8832</div>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="social d-flex justify-content-center">
-                    <a class="mx-auto mx-lg-2" target="_blank" href="https://www.facebook.com/Ledocstarking"><i class="fab fa-facebook-f"></i></a>
-                    <a class="mx-auto mx-lg-2" target="_blank" href="https://www.youtube.com/@Starkingboycrak773"><i class="fab fa-youtube"></i></a>
-                    <a class="mx-auto mx-lg-2" target="_blank" href="https://www.instagram.com/starking_boycrak"><i class="fab fa-instagram"></i></a>
-                    <a class="mx-auto mx-lg-2" target="_blank" href="https://open.spotify.com/artist/4fuZ1IIujJBsCq6P6EXCyn?si=jnmyAwJ6S_OQs_rR0YbbJA"><i class="fab fa-spotify"></i></a>
-                    <a class="mx-auto mx-lg-2" target="_blank" href="https://twitter.com/StarkingBoycrak"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </section>
-        <!-- Footer-->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy;Starking Boycrak 2024</div></footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
-        <!-- Core theme JS-->
-        <!-- <script src="static/js/scripts.js" defer></script> -->
-        <script src="static/js/bootstrap.min.js" defer></script>
+            <div class="mt-6 max-w-xl">
+              <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Boycrak</h1>
+              <p class="mt-4 text-gray-300 text-lg leading-relaxed">La destination incontournable des fans engagés, des passionnés de musique centrafricaine et de l’univers unique de Starking Boycrak.</p>
 
-<script>
-if ('serviceWorker' in navigator) {
-window.addEventListener('load', function() {
-  navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-  }, function(error) {
-    console.log('ServiceWorker registration failed: ', error);
-  });
-});
-}
-</script>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href="songs.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 text-gray-100">Écouter</a>
+                <a href="shop.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 text-gray-100">Boutique</a>
+              </div>
+
+              <div class="mt-6 flex items-center gap-4" aria-label="Social links">
+                <a href="#" aria-label="Instagram" title="Instagram" class="text-gray-200">
+                  <i data-lucide="instagram"  class="w-6 h-6"></i>
+                </a>
+                <a href="#" aria-label="YouTube" title="YouTube" class="text-gray-200">
+                  <i data-lucide="youtube"  class="w-6 h-6"></i>
+                </a>
+                <a href="#" aria-label="TikTok" title="TikTok" class="text-gray-200">
+                  <i data-lucide="music-2"  class="w-6 h-6"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: hero image -->
+          <div class="relative">
+            <div class="relative vignette rounded-2xl overflow-hidden shadow-2xl">
+              <img src="static/assets/bg-hero.webp" alt="Starking Boycrak hero" class="w-full h-[560px] object-cover object-center block" />
+              <div class="absolute left-6 top-6 px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(0,0,0,0.45); color:var(--amber);">Nouveau single</div>
+              <div class="sheen absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container-max px-6 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-semibold">À propos de Starking</h2>
+          <div class="accent-underline" aria-hidden="true"></div>
+          <p class="mt-4 text-gray-300 leading-relaxed">Starking Boycrak fusionne une production cinématographique avec une voix brute et authentique. Inspirée des rues d’Afrique centrale et portée aujourd’hui sur les scènes internationales, sa musique transmet des histoires, de la puissance et une énergie captivante. Découvrez sa musique, ses visuels et toute l’intensité de ses performances live.</p>
+
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded bg-[#071015] border border-gray-800">
+              <div class="text-xs text-gray-400">Le label</div>
+              <div class="font-semibold mt-1">Le Doc Records</div>
+            </div>
+            <div class="p-4 rounded bg-[#071015] border border-gray-800">
+              <div class="text-xs text-gray-400">Années d'activité</div>
+              <div class="font-semibold mt-1">2014 — Aujourd’hui</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="rounded-lg overflow-hidden border border-gray-800">
+          <img src="static/about.webp" alt="Starking in studio" class="w-full h-auto object-cover object-center" />
+        </aside>
+      </div>
+    </section>
+
+    <!-- LARGE GALLERY -->
+    <section id="gallery" class="container-max px-6 py-12">
+      <h3 class="text-2xl font-semibold">Galerie</h3>
+      <div class="accent-underline"></div>
+      <p class="mt-3 text-gray-400">
+        Une sélection d’images issues des studios, des performances scéniques et des campagnes visuelles.
+      </p>
+
+      <div class="mt-8 masonry" aria-label="Image gallery">
+        <figure><img src="static/gallery/g01.webp" alt="Starking en studio d’enregistrement" loading="lazy"></figure>
+        <figure><img src="static/gallery/g02.webp" alt="Performance sur scène" loading="lazy"></figure>
+        <figure><img src="static/gallery/g03.webp" alt="Moment en coulisses" loading="lazy"></figure>
+        <figure><img src="static/gallery/g04.webp" alt="Séance photo de couverture" loading="lazy"></figure>
+        <figure><img src="static/gallery/g05.webp" alt="Portrait urbain" loading="lazy"></figure>
+        <figure><img src="static/gallery/g06.webp" alt="Depuis la foule" loading="lazy"></figure>
+        <figure><img src="static/gallery/g07.webp" alt="Mabia play" loading="lazy"></figure>
+        <figure><img src="static/gallery/g08.webp" alt="Visuel de campagne" loading="lazy"></figure>
+        <figure><img src="static/gallery/g09.webp" alt="Affiche de tournée" loading="lazy"></figure>
+        <figure><img src="static/gallery/g10.webp" alt="Micro noir" loading="lazy"></figure>
+        <figure><img src="static/gallery/g11.webp" alt="Pressage vinyle" loading="lazy"></figure>
+        <figure><img src="static/gallery/g12.webp" alt="Nouveau style" loading="lazy"></figure>
+        <figure><img src="static/gallery/g13.webp" alt="Juste noir" loading="lazy"></figure>
+        <figure><img src="static/gallery/g14.webp" alt="Concert" loading="lazy"></figure>
+        <figure><img src="static/gallery/g15.webp" alt="Concert" loading="lazy"></figure>
+        <figure><img src="static/gallery/g16.webp" alt="Concert" loading="lazy"></figure>
+        <figure><img src="static/gallery/g17.webp" alt="Micro noir" loading="lazy"></figure>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS -->
+    <section id="projects" class="container-max px-6 py-12">
+      <h3 class="text-2xl font-semibold">Projets en vedette</h3>
+      <div class="accent-underline"></div>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="project">
+          <img src="static/assets/m1.webp" alt="Ne Jamais Abandonner cover" class="w-full h-56 object-cover" />
+          <div class="meta">
+            <div class="text-xs text-gray-300">Album • 2024</div>
+            <div class="text-lg font-bold">Ne Jamais Abandonner</div>
+            <p class="text-sm text-gray-300 mt-2">Album cinématographique conçu pour les nuits intenses et les grandes scènes.</p>
+            <div class="mt-3"><a href="songs.html" class="text-sm underline">Écouter & détails</a></div>
+          </div>
+        </article>
+
+        <article class="project">
+          <img src="static/assets/m2.webp" alt="Lumière, Caméra, Action cover" class="w-full h-56 object-cover" />
+          <div class="meta">
+            <div class="text-xs text-gray-300">Single • 2023</div>
+            <div class="text-lg font-bold">Lumière, Caméra, Action</div>
+            <p class="text-sm text-gray-300 mt-2">Single énergique avec une approche fortement visuelle.</p>
+            <div class="mt-3"><a href="songs.html" class="text-sm underline">Regarder le clip</a></div>
+          </div>
+        </article>
+
+        <article class="project">
+          <img src="static/assets/m3.webp" alt="Volume à fond cover" class="w-full h-56 object-cover" />
+          <div class="meta">
+            <div class="text-xs text-gray-300">EP • 2022</div>
+            <div class="text-lg font-bold">Volume à fond</div>
+            <p class="text-sm text-gray-300 mt-2">EP conçu pour les clubs et les performances live.</p>
+            <div class="mt-3"><a href="songs.html" class="text-sm underline">Acheter / Écouter</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SOCIAL CTA -->
+    <section class="container-max px-6 py-12">
+      <div class="rounded-xl p-8 glass flex flex-col md:flex-row items-center gap-6">
+        <div class="flex-1">
+          <h4 class="text-xl font-semibold">Follow Starking</h4>
+          <p class="mt-2 text-gray-300">Premières exclusives, sorties visuelles et annonces de concerts.</p>
+        </div>
+
+        <div class="flex gap-4">
+          <a href="https://www.instagram.com/starking_boycrak" target="_blank" class="px-5 py-3 rounded-full bg-amber text-gray-400 font-semibold">Instagram</a>
+          <a href="https://www.youtube.com/@Starkingboycrak" target="_blank" class="px-5 py-3 rounded-full border border-white/8 text-gray-100">YouTube</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="container-max px-6 py-12 border-t border-gray-900">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <div class="font-semibold">Starking Boycrak</div>
+        <div class="text-gray-400 mt-2 text-sm">  Musique • Production • Performances live</div>
+        <div class="mt-4 text-sm text-gray-400">
+          Suivez-nous: <a href="#" class="underline">Instagram</a> • <a href="#" class="underline">YouTube</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="font-semibold">Liens rapides</div>
+        <ul class="mt-3 text-sm text-gray-400 space-y-2">
+          <li><a href="songs.html" class="underline">Musique</a></li>
+          <li><a href="shop.html" class="underline">Boutique</a></li>
+          <li><a href="services.html" class="underline">Services</a></li>
+          <li><a href="#gallery" class="underline">Galerie</a></li>
+        </ul>
+      </div>
+
+      <div class="text-right md:text-left">
+        <div class="font-semibold">Contact</div>
+        <div class="mt-2 text-gray-400 text-sm">booking@starkingboycrak.com</div>
+        <div class="mt-4 text-sm text-gray-400">© 2025 Starking Boycrak • Tous droits réservés</div>
+      </div>
+    </div>
+  </footer>
 
 
-    </body>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
 </html>
