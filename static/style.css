@@ -1153,6 +1153,10 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:inline-flex {
+    display: inline-flex;
+  }
+
   .md\:w-2\/3 {
     width: 66.666667%;
   }

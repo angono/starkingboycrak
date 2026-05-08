@@ -97,7 +97,7 @@
         <strong class="ml-2">Badass</strong>
       </div>
 
-      <div class="text-xs text-gray-400">
+      <div class="text-xs text-gray-400 hidden md:inline-flex">
         Réservations ouvertes
       </div>
   </div>
@@ -122,14 +122,15 @@
 
       <div class="flex items-center gap-3">
         <a href="mailto:booking@starkingboycrak.com"
-          class="px-4 py-2 rounded-md bg-amber text-gray-400 font-semibold text-sm">
+          class="px-4 py-2 rounded-md bg-amber text-gray-400 font-semibold text-sm hidden md:inline-flex">
           Réserver
         </a>
 
-
         <!-- Mobile menu (details) -->
         <details class="lg:hidden relative">
-          <summary class="list-none text-gray-200 px-3 py-2 rounded-md cursor-pointer">Menu ▾</summary>
+          <summary class="list-none text-gray-200 px-3 py-2 rounded-md cursor-pointer">
+            <i data-lucide="menu"></i>
+          </summary>
           <div class="absolute right-0 mt-2 w-48 bg-[#09080a] border border-gray-800 rounded-md shadow-lg p-3">
             <a href="songs.html" class="block py-2 text-sm">Musique</a>
             <a href="shop.html" class="block py-2 text-sm">Boutique</a>
@@ -328,7 +329,6 @@
       </div>
     </div>
   </footer>
-
 
 
   <script src="https://unpkg.com/lucide@latest"></script>
