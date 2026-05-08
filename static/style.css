@@ -703,6 +703,10 @@ video {
   height: 560px;
 }
 
+.h-auto {
+  height: auto;
+}
+
 .w-10 {
   width: 2.5rem;
 }
